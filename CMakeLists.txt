@@ -6,6 +6,7 @@ cmake_minimum_required (VERSION 2.8.8)
 
 ############ Paths
 
+set_property(GLOBAL PROPERTY CXX_STANDARD 20)
 set (WEBSOCKETPP_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WEBSOCKETPP_INCLUDE ${WEBSOCKETPP_ROOT}/websocketpp)
 set (WEBSOCKETPP_BUILD_ROOT ${CMAKE_CURRENT_BINARY_DIR})
@@ -38,7 +39,6 @@ else()
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
 set(INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header files")
 if (WIN32 AND NOT CYGWIN)
   set (DEF_INSTALL_CMAKE_DIR cmake)
@@ -130,7 +130,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
         endif()
         set (WEBSOCKETPP_PLATFORM_TLS_LIBS ssl crypto)
         set (WEBSOCKETPP_BOOST_LIBS system thread)
-        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
         if (NOT APPLE)
             add_definitions (-DNDEBUG -Wall -Wcast-align) # todo: should we use CMAKE_C_FLAGS for these?
         endif ()
@@ -210,12 +210,12 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
     endif ()
 
     set (Boost_FIND_REQUIRED TRUE)
-    set (Boost_FIND_QUIETLY TRUE)
+    set (Boost_FIND_QUIETLY FALSE)
     set (Boost_DEBUG FALSE)
     set (Boost_USE_MULTITHREADED TRUE)
-    set (Boost_ADDITIONAL_VERSIONS "1.39.0" "1.40.0" "1.41.0" "1.42.0" "1.43.0" "1.44.0" "1.46.1") # todo: someone who knows better spesify these!
+    set (Boost_ADDITIONAL_VERSIONS "1.39.0" "1.40.0" "1.41.0" "1.42.0" "1.43.0" "1.44.0" "1.46.1" "1.74.0") # todo: someone who knows better spesify these!
 
-    find_package (Boost 1.39.0 COMPONENTS "${WEBSOCKETPP_BOOST_LIBS}")
+    find_package (Boost 1.74.0 COMPONENTS ${WEBSOCKETPP_BOOST_LIBS})
 
     if (Boost_FOUND)
         # Boost is a project wide global dependency.

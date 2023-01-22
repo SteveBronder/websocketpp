@@ -9,26 +9,26 @@ struct connection_data {
 
 struct custom_config : public websocketpp::config::asio {
     // pull default settings from our core config
-    typedef websocketpp::config::asio core;
+    using core = websocketpp::config::asio;
     
-    typedef core::concurrency_type concurrency_type;
-    typedef core::request_type request_type;
-    typedef core::response_type response_type;
-    typedef core::message_type message_type;
-    typedef core::con_msg_manager_type con_msg_manager_type;
-    typedef core::endpoint_msg_manager_type endpoint_msg_manager_type;
-    typedef core::alog_type alog_type;
-    typedef core::elog_type elog_type;
-    typedef core::rng_type rng_type;
-    typedef core::transport_type transport_type;
-    typedef core::endpoint_base endpoint_base;
+    using concurrency_type = core::concurrency_type;
+    using request_type = core::request_type;
+    using response_type = core::response_type;
+    using message_type = core::message_type;
+    using con_msg_manager_type = core::con_msg_manager_type;
+    using endpoint_msg_manager_type = core::endpoint_msg_manager_type;
+    using alog_type = core::alog_type;
+    using elog_type = core::elog_type;
+    using rng_type = core::rng_type;
+    using transport_type = core::transport_type;
+    using endpoint_base = core::endpoint_base;
     
     // Set a custom connection_base class
-    typedef connection_data connection_base;
+    using connection_base = connection_data;
 };
 
-typedef websocketpp::server<custom_config> server;
-typedef server::connection_ptr connection_ptr;
+using server = websocketpp::server<custom_config>;
+using connection_ptr = server::connection_ptr;
 
 using websocketpp::connection_hdl;
 using websocketpp::lib::placeholders::_1;
